@@ -1,0 +1,199 @@
+Sistema de Locadora de Veículos — 
+Visão Geral
+
+Este repositório contém uma aplicação desktop em Java (Swing) para gerenciamento de uma locadora de veículos.
+
+O projeto demonstra uso de:
+
+Hibernate (JPA) com banco H2 em arquivo
+
+Arquitetura em camadas
+
+Interface gráfica Swing + FlatLaf
+
+Componentes de data com Swing DateTime Picker
+
+Renderers personalizados
+
+CRUD completo para Usuários, Veículos e Aluguéis
+
+Aplicação desenvolvida para fins acadêmicos na disciplina de POO2 – IFRS.
+
+Arquitetura / Componentes
+
+model
+Contém as entidades JPA do sistema:
+
+Usuario
+
+Veiculo
+
+Aluguel
+
+repository
+Controle de persistência via Hibernate (CRUD):
+
+UsuarioRepository
+
+VeiculoRepository
+
+AluguelRepository
+
+service
+Regras de negócio, validações e orquestração entre camadas:
+
+UsuarioService
+
+VeiculoService
+
+AluguelService
+
+ui
+Interface Swing:
+
+MainWindow
+
+UsuariosListDialog
+
+VeiculosListDialog
+
+AlugueisListDialog
+
+Formulários individuais de cadastro/edição
+
+util
+Funções auxiliares:
+
+ValidationUtils (regex de placa, email, telefone, moeda)
+
+Renderers (ColorCellRenderer, StatusIconRenderer)
+
+Ponto de Entrada
+
+com.locadora.app.PontoDeEntrada
+
+
+Inicializa o tema FlatLaf e abre a interface principal.
+
+Tecnologias e Dependências
+
+Java 17+
+
+Hibernate ORM (JPA)
+
+H2 Database (arquivo local)
+
+Swing + FlatLaf
+
+Swing DateTime Picker (DJ-Raven)
+
+Maven
+
+As dependências são gerenciadas via pom.xml.
+
+Configuração do Banco
+
+Arquivo JPA:
+
+src/main/resources/META-INF/persistence.xml
+
+
+Configuração utilizada:
+
+Unidade: locadoraPU
+
+Driver: org.h2.Driver
+
+URL:
+
+jdbc:h2:./data/locadora;AUTO_SERVER=TRUE
+
+
+Usuário: sa
+
+Esquema: gerado automaticamente com hibernate.hbm2ddl.auto=update
+
+O banco fica salvo em:
+
+data/locadora.mv.db
+
+Fluxo de Inicialização
+
+PontoDeEntrada aplica FlatLaf
+
+Cria a janela MainWindow
+
+Usuário abre CRUDs de Usuários, Veículos e Aluguéis
+
+CRUD usa Services → Repository → Hibernate
+
+Tabelas Swing possuem ordenação, renderers e atualizações automáticas
+
+Como Compilar
+mvn clean package
+
+Como Executar
+
+Via IDE (recomendado):
+
+Execute:
+
+com.locadora.app.PontoDeEntrada
+
+
+Via Maven:
+
+mvn org.codehaus.mojo:exec-maven-plugin:3.1.0:java ^
+  -Dexec.mainClass="com.locadora.app.PontoDeEntrada"
+
+Uso da Aplicação
+
+Botões principais: Usuários, Veículos, Aluguéis
+
+Cada tela possui listagem + ações CRUD
+
+Abertura de Aluguel inclui:
+
+seletores de usuário e veículo
+
+data picker
+
+quilometragem inicial
+
+status ABERTO
+
+Fechamento de Aluguel inclui:
+
+quilometragem final
+
+atualização de status
+
+resumo do aluguel
+
+Validações e Regras de Negócio
+
+Email válido
+
+Telefone com formato brasileiro
+
+Placa Mercosul e antiga
+
+Cor via renderer
+
+Datas coerentes no aluguel
+
+Melhorias Futuras
+
+Testes JUnit
+
+Exportação de relatórios
+
+Logs detalhados
+
+Internacionalização da interface
+
+Uso de banco externo (PostgreSQL)
+
+Licença
+
+Código desenvolvido para fins educacionais – IFRS.
